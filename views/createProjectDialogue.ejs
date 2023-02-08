@@ -1,0 +1,29 @@
+<html>
+<head>
+    <title> Issue Tracker | Home </title>
+</head>
+<body>
+    <form action="create-Project" method="post">
+        <input type="text" name="name" >
+        <input type="text" name="description" >
+        <input type="text" name="author" >
+    </form>
+
+    <div>
+        <ul>
+            <% for(let i of projectList){ %>
+                <li>
+                    <p> <%=i.name %> </p>
+                    <p> <%=i.description %> </p>
+                    <p> <%=i.author %> </p>
+                </li>
+            <% } %>
+        </ul>
+
+        <button>Open Project</button>
+    </div>  
+</div>
+
+
+</body>
+</html>
