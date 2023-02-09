@@ -1,15 +1,22 @@
 <html>
 <head>
-    <title> Issue Tracker | Home </title>
+    <title> <%= title %>> </title>
+    <script src="https://kit.fontawesome.com/34ad640c13.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/css/index.css">
 </head>
 <body>
 
     <div id="container">
         <div id="button" >
-            <button>
-                Create Project
-            </button>
+            <form action="/createProjectDialogue" method="post">
+                <button>
+                    Create Project
+                </button>
+            </form>
+            
         </div>
+
+    <script type="text/javascript" src="/js/index.js"></script>
     
 </body>
 </html>

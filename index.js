@@ -5,20 +5,30 @@ const app = express(); //running express
 
 app.set('view engine', 'ejs'); //setting view engine as ejs
 app.set('views', path.join(__dirname, 'views')); //setting up views folder
+app.use(express.urlencoded());//middleware to parse data
+app.use(express.static('assets'));
 
+
+// use express router
+// app.use('/', require('./routes'));
 
 app.get("/", function(req, res){
 
-    return res.render('index');
+    return res.render('index', {
+        title: "Home"
+    });
 
 });
 
 app.post('/createProjectDialogue', function(req, res){
-
+    return res.render('createProjectDialogue', {
+        title: "Create Project"
+    });
 });
 
 app.post('/create-Project', function(req, res){
-
+    console.log(req.body);
+    return res.redirect('/');
 });
 
 
