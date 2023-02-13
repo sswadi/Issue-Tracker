@@ -1,6 +1,6 @@
 body{
     
-    background-color: aqua;
+    background-color: rgb(243, 247, 247);
     margin: 0;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     
@@ -16,4 +16,23 @@ body{
 #button{
     margin-top: 45px;
     text-align: center;
+}
+
+.deetsAndDelete{
+    display : flex;
+    background-color: #beb9b9;
+    margin: 5px;
+    padding: 10px;
+    font-size: 20px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.deetsAndDelete>ProjectList{
+    width: 80%;
+}
+
+.delete-button{
+    position: relative;
+    /* right: 10px; */
 }
