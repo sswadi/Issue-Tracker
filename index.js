@@ -16,18 +16,6 @@ app.use(express.static('assets'));//setting up assets directory
 // use express router
 // app.use('/', require('./routes'));
 
-// var createProj = [
-//     {
-//         name: "Xy",
-//         description: "qwqwe",
-//         author: "swa"
-//     },
-//     {
-//         name: "po",
-//         description: "lk",
-//         author: "swzee"
-//     }  
-// ]
   
 //home page
 app.get("/", function(req, res){
@@ -69,11 +57,6 @@ app.post('/create-Project', function(req, res){
 
 });
 
-app.get('/projectDetails', function(req,res){
-
-});
-
-
 //this function can delete a new project created(home page)
 app.get('/deleteProjectDetails', function(req,res){
 
@@ -89,10 +72,32 @@ app.get('/deleteProjectDetails', function(req,res){
      });
 });
 
+//on clicking on one of the project it takes us to the details of a project
+app.post('/projectDetails/', function(req,res){
+
+    let projId = req.query.id;
+
+    CreateProjectDetails.findOne({id: 'projId'}, function(err, allProjects){
+        if(err){
+            console.log('Error in fetching the selected project! ');
+        }
+        return res.render('projectDetails', {
+            title: "Project Details",
+            create_Proj: allProjects
+        });
+
+    });
+
+});
 
 
+//this takes us to create issue page
+app.post('/createIssue', function(req,res){
+    return res.render('createIssue', {
+        title: "Create Issue"
+    });
 
-
+});
 
 
 
