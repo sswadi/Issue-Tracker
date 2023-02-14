@@ -12,8 +12,25 @@ const projectDetails = new mongoose.Schema({ //projectDetails object will create
     author: {
         type: String,
         required: true
-    }
-});
+    },
+    issue: [
+        {
+            
+        }
+
+    ],
+    labels: [
+        {
+
+        }
+    ]
+    
+},
+{
+    timestamps: true
+}
+
+);
 
 
 const CreateProjectDetails = mongoose.model('CreateProjectDetails', projectDetails); //calling model method on mongoose object and pass projectDetais schema abd call it CreateProjectDetials
