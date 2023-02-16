@@ -2,7 +2,8 @@ const express = require('express'); //importing express js
 const path = require('path'); //requiring path module to set up views folder
 const port = 8000; // setting the port
 const db = require('./config/mongoose');//requiring the file(library) for db connection
-const CreateProjectDetails = require('./models/projectDetails');// requiring database schema
+const CreateProjectDetails = require('./models/projectDetails');// requiring database schema for projects
+const CreateIssueDetails = require('./models/issues');// requiring issues schema for projects
 const expressLayouts = require('express-ejs-layouts');
 
 
@@ -75,8 +76,6 @@ app.get('/deleteProjectDetails', function(req,res){
      });
 });
 
-
-
 //on clicking on one of the project it takes us to the details of a project
 app.post('/projectDetails/', function(req,res){
 
@@ -88,12 +87,11 @@ app.post('/projectDetails/', function(req,res){
         }
         return res.render('projectDetails', {
             title: "Project Details",
-            create_Proj: allProjects
+            create_Proj: allProjects,
+            // create_Issue: allProjects.create_Issue 
         });
     });
 });
-
-
 
 //this takes us to create issue page
 app.post('/createIssue', function(req,res){
@@ -104,9 +102,22 @@ app.post('/createIssue', function(req,res){
 });
 
 // this appends issues to the specific project
-app.post('projectDetails/addIssue',function(req,res){
-    return res.render('createIssue', {
-        issue: ""
+app.post('/projectDetails/addIssue',function(req,res){
+    
+    // let projId = 
+    let issue = CreateIssueDetails.create({
+        title: req.body.title,
+        description: req.body.description,
+        labels: req.body.labels,
+        author: req.body.author
+
+    }, function(err, newProject){
+        if(err){
+            console.log('error in creating a new project in the database!');
+            return;
+        }
+        // CreateProjectDetails.issue.push(issue);
+        return res.redirect('/projectDetails');
     });
 });
 

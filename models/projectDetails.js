@@ -13,17 +13,19 @@ const projectDetails = new mongoose.Schema({ //projectDetails object will create
         type: String,
         required: true
     },
+
     issue: [
         {
-            
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'issues',
         }
-
     ],
-    labels: [
-        {
 
-        }
-    ]
+    // labels: [
+    //     {
+    //         type: String,
+    //     }
+    // ]
     
 },
 {

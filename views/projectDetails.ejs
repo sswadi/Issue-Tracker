@@ -23,6 +23,20 @@
                             <p>Name: <%= i.name %></p>
                             <p>Description: <%= i.description %></p>
                             <p>Author: <%= i.author %></p>
+
+                                <ul>
+                                    <% for(let j of i.issue){ %>
+                                            <li class="IssueList">
+                                                <p>Title: <%= j.title %></p>
+                                                <p>Description: <%= j.description %></p>
+                                                <p>Label: <%= j.labels %></p>
+                                                <p>Author: <%= j.author %></p>
+                                            </li>
+                                    <% } %>
+                    
+                                </ul>
+
+                           
                         </li>
                 <% } %>
             </ul>
