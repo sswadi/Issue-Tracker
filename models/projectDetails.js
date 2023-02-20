@@ -21,11 +21,7 @@ const projectDetails = new mongoose.Schema({ //projectDetails object will create
         }
     ],
 
-    // labels: [
-    //     {
-    //         type: String,
-    //     }
-    // ]
+    // issues: [issues]
     
 },
 {

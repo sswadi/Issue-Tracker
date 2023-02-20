@@ -36,19 +36,22 @@
                     
                                 </ul>
 
+                                <div id="button" >
+                                    <form action="/createIssue/?id=<%= i._id %>" method="post">
+                                        <button>
+                                            Create Issue
+                                        </button>
+                                    </form>
+                                </div>
                            
                         </li>
                 <% } %>
             </ul>
 
         </div>
-        <div id="button" >
-            <form action="/createIssue/" method="post">
-                <button>
-                    Create Issue
-                </button>
-            </form>
-        </div>
+       
+
+
 
 
     </div>

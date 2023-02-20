@@ -88,37 +88,92 @@ app.post('/projectDetails/', function(req,res){
         return res.render('projectDetails', {
             title: "Project Details",
             create_Proj: allProjects,
-            // create_Issue: allProjects.create_Issue 
+            // create_Issue: allProjects.create_Issue //not able to map issues with respective projects
+            //
         });
     });
 });
 
 //this takes us to create issue page
-app.post('/createIssue', function(req,res){
+app.post('/createIssue/', function(req,res){
     return res.render('createIssue', {
         title: "Create Issue"
+        //here the id needs to be passed to the next page so that the entry gets saved in that specific project
     });
 
 });
 
-// this appends issues to the specific project
-app.post('/projectDetails/addIssue',function(req,res){
+// // this appends issues to the specific project
+// app.post('/addIssue',function(req,res){
     
-    // let projId = 
-    let issue = CreateIssueDetails.create({
-        title: req.body.title,
-        description: req.body.description,
-        labels: req.body.labels,
-        author: req.body.author
+//     // console.log("~~~~~~~~~~~", req.body);
+//     // let projId = req.query.id; 
+    
+//     let issue = CreateIssueDetails.create({
 
-    }, function(err, newProject){
-        if(err){
-            console.log('error in creating a new project in the database!');
-            return;
+//         title: req.body.title,
+//         description: req.body.description,
+//         labels: req.body.labels.split(',').map(labels => labels.trim()),
+//         author: req.body.author
+
+//     }, function(err, newProject){
+//         if(err){
+//             console.log('error in creating a new project in the database!');
+//             return;
+//         }
+//         // CreateProjectDetails.issue.push(issue);
+        
+//         return res.redirect('/projectDetails/{$projId}');
+//     });
+// });
+
+// this appends issues to the specific project
+app.post('/addIssue', async (req,res)=> {
+
+        const projectId = req.body._id;
+        const title= req.body.title;
+        const description= req.body.description;
+        // const labels= req.body.labels.split(',').map(labels => labels.trim());// what does split and map do in this case?
+        const labels= req.body.labels
+        const author= req.body.author;
+
+        console.log('Hiiiiiiiiiiii ',req.body._id);
+        const project = await CreateProjectDetails.findById(projectId);
+        
+        if(!project){
+            return res.status(404).send('Project not found');
         }
-        // CreateProjectDetails.issue.push(issue);
-        return res.redirect('/projectDetails');
-    });
+        
+
+        // const issue = new CreateIssueDetails({
+        //     title: title,
+        //     description: description,
+        //     labels: labels,
+        //     author: author,
+        //     project: projectId
+        //   }); //what is the diff b/w new CreateIssueDetails and CreateIssueDetails.create?
+
+        let issue = CreateIssueDetails.create({
+            title: title,
+            description: description,
+            labels: labels,
+            author: author
+            
+        }, function(err, newProject){
+            if(err){
+                console.log('error in creating a new project in the database!');
+                return;
+            }
+
+            CreateProjectDetails.issue.push(issue);
+
+            // await project.save(); //what are these two lines for?
+            // await issue.save();
+
+        });
+        
+         res.redirect('/projectDetails/{$projId}');
+         
 });
 
 
