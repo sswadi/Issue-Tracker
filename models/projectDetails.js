@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Issue = require('./issues');
 
 const projectDetails = new mongoose.Schema({ //projectDetails object will create an instance of the schema
     name: {
@@ -21,8 +22,7 @@ const projectDetails = new mongoose.Schema({ //projectDetails object will create
         }
     ],
 
-    // issues: [issues]
-    
+    // issue: [ issues ]  
 },
 {
     timestamps: true

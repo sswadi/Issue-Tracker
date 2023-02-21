@@ -24,9 +24,10 @@
                             <p>Description: <%= i.description %></p>
                             <p>Author: <%= i.author %></p>
 
+                            <p>Issue: <%= i.issue %> 
                                 <ul>
                                     <% for(let j of i.issue){ %>
-                                            <li class="IssueList">
+                                            <li class="IssueList">  
                                                 <p>Title: <%= j.title %></p>
                                                 <p>Description: <%= j.description %></p>
                                                 <p>Label: <%= j.labels %></p>
@@ -35,6 +36,7 @@
                                     <% } %>
                     
                                 </ul>
+                            </p>
 
                                 <div id="button" >
                                     <form action="/createIssue/?id=<%= i._id %>" method="post">

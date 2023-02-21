@@ -3,8 +3,9 @@ const path = require('path'); //requiring path module to set up views folder
 const port = 8000; // setting the port
 const db = require('./config/mongoose');//requiring the file(library) for db connection
 const CreateProjectDetails = require('./models/projectDetails');// requiring database schema for projects
-const CreateIssueDetails = require('./models/issues');// requiring issues schema for projects
+const issuesAdd = require('./models/issues');// requiring issues schema for projects
 const expressLayouts = require('express-ejs-layouts');
+const { Console } = require('console');
 
 
 const app = express(); //running express 
@@ -80,71 +81,41 @@ app.get('/deleteProjectDetails', function(req,res){
 app.post('/projectDetails/', function(req,res){
 
     let projId = req.query.id;
-
     CreateProjectDetails.find({_id:projId}, function(err, allProjects){
         if(err){
             console.log('Error in fetching the selected project! ');
         }
+        console.log('----------', allProjects);
         return res.render('projectDetails', {
             title: "Project Details",
             create_Proj: allProjects,
-            // create_Issue: allProjects.create_Issue //not able to map issues with respective projects
-            //
         });
     });
 });
 
 //this takes us to create issue page
 app.post('/createIssue/', function(req,res){
+
+    let projId = req.query.id;
     return res.render('createIssue', {
-        title: "Create Issue"
+        title: "Create Issue",
         //here the id needs to be passed to the next page so that the entry gets saved in that specific project
+        idd: projId
     });
 
 });
 
-// // this appends issues to the specific project
-// app.post('/addIssue',function(req,res){
-    
-//     // console.log("~~~~~~~~~~~", req.body);
-//     // let projId = req.query.id; 
-    
-//     let issue = CreateIssueDetails.create({
-
-//         title: req.body.title,
-//         description: req.body.description,
-//         labels: req.body.labels.split(',').map(labels => labels.trim()),
-//         author: req.body.author
-
-//     }, function(err, newProject){
-//         if(err){
-//             console.log('error in creating a new project in the database!');
-//             return;
-//         }
-//         // CreateProjectDetails.issue.push(issue);
-        
-//         return res.redirect('/projectDetails/{$projId}');
-//     });
-// });
-
 // this appends issues to the specific project
 app.post('/addIssue', async (req,res)=> {
 
-        const projectId = req.body._id;
-        const title= req.body.title;
-        const description= req.body.description;
-        // const labels= req.body.labels.split(',').map(labels => labels.trim());// what does split and map do in this case?
-        const labels= req.body.labels
-        const author= req.body.author;
-
-        console.log('Hiiiiiiiiiiii ',req.body._id);
-        const project = await CreateProjectDetails.findById(projectId);
+    
+        let projId = req.query.id;
+        const project = await CreateProjectDetails.findById(projId);
         
         if(!project){
             return res.status(404).send('Project not found');
         }
         
-
         // const issue = new CreateIssueDetails({
         //     title: title,
         //     description: description,
@@ -153,33 +124,30 @@ app.post('/addIssue', async (req,res)=> {
         //     project: projectId
         //   }); //what is the diff b/w new CreateIssueDetails and CreateIssueDetails.create?
 
-        let issue = CreateIssueDetails.create({
-            title: title,
-            description: description,
-            labels: labels,
-            author: author
+        let issue = issuesAdd.create({
+            title: req.body.title,
+            description: req.body.description,
+            labels: req.body.labels,
+            author: req.body.author,
+            project: req.query.id
             
         }, function(err, newProject){
             if(err){
+                
                 console.log('error in creating a new project in the database!');
                 return;
             }
-
-            CreateProjectDetails.issue.push(issue);
+        
+            project.issue.push(issue); //issues arent getting added in project details schema under issue array
 
             // await project.save(); //what are these two lines for?
             // await issue.save();
 
         });
         
-         res.redirect('/projectDetails/{$projId}');
+        res.redirect(`/projectDetails/${projId}`);
          
 });
-
-
-
-
-
 
 
 

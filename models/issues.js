@@ -23,7 +23,18 @@ const issues = new mongoose.Schema({
             trim: true,
             required: true,
         }
-    ]  
+    ],
+
+    // labels: {
+    //     type: [String],
+    //     default: []
+    // },
+    
+    project: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'projectDetails',
+        required: true
+    }
 },
 {
     timestamps: true
