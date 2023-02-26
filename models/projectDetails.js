@@ -18,11 +18,9 @@ const projectDetails = new mongoose.Schema({ //projectDetails object will create
     issue: [
         {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'issues',
+            ref: 'AddIssues',
         }
     ],
-
-    // issue: [ issues ]  
 },
 {
     timestamps: true
@@ -30,6 +28,6 @@ const projectDetails = new mongoose.Schema({ //projectDetails object will create
 
 );
 
-
+                                           //collection
 const CreateProjectDetails = mongoose.model('CreateProjectDetails', projectDetails); //calling model method on mongoose object and pass projectDetais schema abd call it CreateProjectDetials
 module.exports = CreateProjectDetails;

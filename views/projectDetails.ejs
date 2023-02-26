@@ -18,15 +18,15 @@
         <div class="details">
             <ul>
                 <% for(let i of create_Proj){ %>
+                    <p> *** <%= create_Proj %></p>
                     <div class="deetsSection">
                         <li class="ProjectList">
                             <p>Name: <%= i.name %></p>
                             <p>Description: <%= i.description %></p>
                             <p>Author: <%= i.author %></p>
-
-                            <p>Issue: <%= i.issue %> 
+                            <p>Issue:
                                 <ul>
-                                    <% for(let j of i.issue){ %>
+                                    <% for(let j of i.issue ){ %>
                                             <li class="IssueList">  
                                                 <p>Title: <%= j.title %></p>
                                                 <p>Description: <%= j.description %></p>

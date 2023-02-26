@@ -7,7 +7,6 @@ const issuesAdd = require('./models/issues');// requiring issues schema for proj
 const expressLayouts = require('express-ejs-layouts');
 const { Console } = require('console');
 
-
 const app = express(); //running express 
 
 app.use(expressLayouts);//using package: express-ejs-layout that was downloaded
@@ -24,7 +23,6 @@ app.use(express.static('assets'));//setting up assets directory
   
 //home page
 app.get("/", function(req, res){
-
     CreateProjectDetails.find({}, function(err, allProjects){
         if(err){
             console.log('Error in fetching the entire project list! ');
@@ -33,9 +31,7 @@ app.get("/", function(req, res){
             title: "Home",
             create_Proj: allProjects
         });
-
     });
-
 });
 
 //create project page
@@ -77,20 +73,31 @@ app.get('/deleteProjectDetails', function(req,res){
      });
 });
 
-//on clicking on one of the project it takes us to the details of a project
+// //on clicking on one of the project it takes us to the details of a project
 app.post('/projectDetails/', function(req,res){
 
     let projId = req.query.id;
-    CreateProjectDetails.find({_id:projId}, function(err, allProjects){
-        if(err){
-            console.log('Error in fetching the selected project! ');
-        }
-        console.log('----------', allProjects);
-        return res.render('projectDetails', {
-            title: "Project Details",
-            create_Proj: allProjects,
+    let issueId = req.query.id;
+
+    CreateProjectDetails.find({_id:projId}
+        , function(err, allProjects){
+            if(err){
+                console.log('Error in fetching the selected project! ');
+            }
+    
+            return res.render('projectDetails', {
+                title: "Project Details",
+                create_Proj: allProjects,
+                issuesL: issuesAdd.find({_id:issueId})
+
+            });
         });
-    });
+
+        CreateProjectDetails.findOne({ _id:projId }).populate('issue').
+        exec(function (err, project) {
+            if (err) return console.log('Error in ', err);
+  });
+    
 });
 
 //this takes us to create issue page
@@ -107,7 +114,6 @@ app.post('/createIssue/', function(req,res){
 
 // this appends issues to the specific project
 app.post('/addIssue', async (req,res)=> {
-
     
         let projId = req.query.id;
         const project = await CreateProjectDetails.findById(projId);
@@ -115,41 +121,26 @@ app.post('/addIssue', async (req,res)=> {
         if(!project){
             return res.status(404).send('Project not found');
         }
-        
-        // const issue = new CreateIssueDetails({
-        //     title: title,
-        //     description: description,
-        //     labels: labels,
-        //     author: author,
-        //     project: projectId
-        //   }); //what is the diff b/w new CreateIssueDetails and CreateIssueDetails.create?
 
         let issue = issuesAdd.create({
             title: req.body.title,
             description: req.body.description,
-            labels: req.body.labels,
+            labels: req.body.labels, //does this need to be changed?
             author: req.body.author,
-            project: req.query.id
+            project: req.query.id,
+            issue: req.query.issues
             
-        }, function(err, newProject){
+        }, async function(err, issue){
             if(err){
-                
                 console.log('error in creating a new project in the database!');
                 return;
             }
-        
-            project.issue.push(issue); //issues arent getting added in project details schema under issue array
-
-            // await project.save(); //what are these two lines for?
-            // await issue.save();
-
+            project.issue.push(issue); 
+            await project.save(); 
+            await issue.save();
         });
-        
-        res.redirect(`/projectDetails/${projId}`);
-         
+        res.redirect(`/projectDetails?id=${projId}`);  
 });
-
-
 
 //verifying if the server is connected or not
 app.listen(port, function(err){

@@ -17,19 +17,14 @@ const issues = new mongoose.Schema({
         required: true
     },
 
-    labels: [
+    labels: 
         {
             type: String,
             trim: true,
             required: true,
         }
-    ],
+    ,
 
-    // labels: {
-    //     type: [String],
-    //     default: []
-    // },
-    
     project: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'projectDetails',
