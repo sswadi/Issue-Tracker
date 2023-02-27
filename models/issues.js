@@ -27,7 +27,7 @@ const issues = new mongoose.Schema({
 
     project: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'projectDetails',
+        ref: 'CreateProjectDetails',
         required: true
     }
 },

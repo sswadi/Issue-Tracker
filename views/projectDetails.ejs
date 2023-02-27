@@ -8,17 +8,33 @@
     <div class="Main-container">
 
         <div class="filter">
+            <form action="/projectDetails/xyz">
+                <input type="checkbox" id="label" name="label" value="Bug">
+                <label for="label1"> Bug</label><br>
+                <input type="checkbox" id="label" name="label" value="UI Improvement">
+                <label for="label2"> UI Improvement</label><br>
+                <input type="checkbox" id="label" name="label" value="Enhancement">
+                <label for="label3">Enhancement</label><br>
+                <input type="checkbox" id="label" name="label" value="Documentation">
+                <label for="label4">Documentation</label><br><br>
+                <input type="submit" value="Submit">
+              </form>
+
+            <select name="authors-filter" multiple id ="authors_filter">
+                <% for(let i of create_Proj){ %>
+                        <option value="<%= i.author %>"><%= i.author %></option>
+                <% } %>
+            </select>
 
         </div>
         <div class="search">
-        
+            <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Type in project title/desc.." title="Type in project title/desc..">
 
         </div>
         
         <div class="details">
             <ul>
                 <% for(let i of create_Proj){ %>
-                    <p> *** <%= create_Proj %></p>
                     <div class="deetsSection">
                         <li class="ProjectList">
                             <p>Name: <%= i.name %></p>

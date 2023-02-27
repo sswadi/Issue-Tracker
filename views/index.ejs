@@ -30,11 +30,9 @@
                         </div>
                     </div>
                     
-                    <form action="/projectDetails?id=<%= i._id %>" method="post">
-                        <button>
-                            Open Project
-                        </button>
-                    </form>
+                    <button>
+                        <a href="/projectDetails?id=<%= i._id %>">Open Project</a>
+                    </button>
                     
                 <% } %>
             </ul>

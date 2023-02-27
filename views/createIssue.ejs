@@ -3,27 +3,6 @@
     <title> <%= title %> </title>
 </head>
 <body>
-    
-    <section id="filter">
-        <form id="navbar" action="/issueTracker/filterProjectDetails/" method="post">
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="flexRadio" value="Project Title" id="flexRadio1"
-                    required>
-                <label class="form-check-label" for="flexRadio1">Project Title</label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="flexRadio" value="Project Description" id="flexRadio2"
-                    required>
-                <label class="form-check-label" for="flexRadio2">Project Description</label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="flexRadio" value="Project Author" id="flexRadio3"
-                    required>
-                <label class="form-check-label" for="flexRadio3">Project Author</label>
-            </div>
-            <button type="submit" class="btn btn-primary">Filter</button>
-        </form>
-    </section>
 
     <form action="/addIssue?id=<%= idd %>" method="post">
         <input type="text" name="title" placeholder="Type in the title.." required>

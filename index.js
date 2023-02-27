@@ -74,31 +74,50 @@ app.get('/deleteProjectDetails', function(req,res){
 });
 
 // //on clicking on one of the project it takes us to the details of a project
-app.post('/projectDetails/', function(req,res){
+app.get('/projectDetails/', function(req,res){
 
     let projId = req.query.id;
-    let issueId = req.query.id;
 
-    CreateProjectDetails.find({_id:projId}
-        , function(err, allProjects){
+    CreateProjectDetails.find({_id:projId}).populate("issue").exec(function(err, allProjects){
             if(err){
                 console.log('Error in fetching the selected project! ');
             }
+
+            if (!projId) {
+                create_Proj = [];
+              }
     
             return res.render('projectDetails', {
                 title: "Project Details",
                 create_Proj: allProjects,
-                issuesL: issuesAdd.find({_id:issueId})
 
             });
         });
 
-        CreateProjectDetails.findOne({ _id:projId }).populate('issue').
-        exec(function (err, project) {
-            if (err) return console.log('Error in ', err);
   });
+
+
+//another async way to write the above function
+//   app.get("/projectDetails_swati/", async function (req, res) {
+//     let projId = req.query.id;
+//     let issueId = req.query.id;
+  
+//     try {
+//       let projects = await CreateProjectDetails.find({ _id: projId }).populate(
+//         "issue"
+//       );
+  
+//       return res.render("projectDetails", {
+//         title: "Project Details",
+//         create_Proj: allProjects,
+//       });
+//     } catch (error) {
+//       return res.render("error", {
+//         mssg: error.getMessage,
+//       });
+//     }
+//   });
     
-});
 
 //this takes us to create issue page
 app.post('/createIssue/', function(req,res){
@@ -138,9 +157,27 @@ app.post('/addIssue', async (req,res)=> {
             project.issue.push(issue); 
             await project.save(); 
             await issue.save();
+
+            res.redirect(`/projectDetails?id=${projId}`);  
         });
-        res.redirect(`/projectDetails?id=${projId}`);  
+       
 });
+
+// when  a person selects a label, the project page displays only projects associated with the selected labels
+app.get('/projectDetails/xyz', function(req,res){
+
+    q = req.query.label; //creating in object to fetch lable values  
+    let labels = Object.values(req.query);
+
+    console.log('labelssssss ',labels);
+
+    // let url= new URL('req.url');
+    // let params = new URLSearchParams(url.search);
+
+
+});
+
+
 
 //verifying if the server is connected or not
 app.listen(port, function(err){
