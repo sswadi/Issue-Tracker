@@ -166,13 +166,25 @@ app.post('/addIssue', async (req,res)=> {
 // when  a person selects a label, the project page displays only projects associated with the selected labels
 app.get('/projectDetails/xyz', function(req,res){
 
+    let projId = req.query.id;
     q = req.query.label; //creating in object to fetch lable values  
-    let labels = Object.values(req.query);
+    let labels = Object.values(req.query); //fetching only lables in an array
+    const project = CreateProjectDetails.find({_id:projId}).populate("issue").exec(function(err, allProjects){
+        if(err){
+            console.log('Error in fetching the selected project details! ');
+        }
 
-    console.log('labelssssss ',labels);
+        // if (!q) {
+        //     create_Proj = [];
+        //   }
 
-    // let url= new URL('req.url');
-    // let params = new URLSearchParams(url.search);
+        return res.render('projectDetails', {
+            title: "Project Details",
+            create_Proj: allProjects,
+
+        });
+    });
+
 
 
 });
