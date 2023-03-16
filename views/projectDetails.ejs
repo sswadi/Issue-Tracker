@@ -6,19 +6,17 @@
 <body>
 
     <div class="Main-container">
-
         <div class="filter">
-            <form action="/projectDetails/xyz?id=">
-                <input type="checkbox" id="label" name="label" value="Bug">
+           
+                <input type="checkbox" class="label" onchange="handleLabelsEvent()" name="label" value="Bug">
                 <label for="label1"> Bug</label><br>
-                <input type="checkbox" id="label" name="label" value="UI Improvement">
+                <input type="checkbox" class="label" name="label" value="UI Improvement" onchange="handleLabelsEvent()">
                 <label for="label2"> UI Improvement</label><br>
-                <input type="checkbox" id="label" name="label" value="Enhancement">
+                <input type="checkbox" class="label" name="label" value="Enhancement" onchange="handleLabelsEvent()">
                 <label for="label3">Enhancement</label><br>
-                <input type="checkbox" id="label" name="label" value="Documentation">
+                <input type="checkbox" class="label" name="label" value="Documentation" onchange="handleLabelsEvent()">
                 <label for="label4">Documentation</label><br><br>
                 <input type="submit" value="Submit">
-              </form>
 
             <select name="authors-filter" multiple id ="authors_filter">
                 <% for(let i of create_Proj){ %>
@@ -41,7 +39,8 @@
                             <p>Description: <%= i.description %></p>
                             <p>Author: <%= i.author %></p>
                             <p>Issue:
-                                <ul>
+                                <ul id="all-issues-list" data-all-issues = "<%= issue_list %>">
+                                    
                                     <% for(let j of i.issue ){ %>
                                             <li class="IssueList">  
                                                 <p>Title: <%= j.title %></p>
@@ -74,6 +73,7 @@
 
     </div>
 
+    <script type="text/javascript" src="/js/index.js"></script>
 
 </body>
 </html>

@@ -86,10 +86,23 @@ app.get('/projectDetails/', function(req,res){
             if (!projId) {
                 create_Proj = [];
               }
+
+            var IssueList = []; //empty array to store all issue pertaining to a project
+            allProjects[0].issue.map((item)=>{
+                let temp = {
+                    "title" : item.title,
+                    "description" : item.description,
+                    "label" : item.labels,
+                    "author" : item.author
+                }
+
+                IssueList.push(temp);
+            });
     
             return res.render('projectDetails', {
                 title: "Project Details",
                 create_Proj: allProjects,
+                issue_list: JSON.stringify(IssueList)
 
             });
         });
@@ -184,9 +197,6 @@ app.get('/projectDetails/xyz', function(req,res){
 
         });
     });
-
-
-
 });
 
 
