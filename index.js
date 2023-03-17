@@ -88,13 +88,14 @@ app.get('/projectDetails/', function(req,res){
               }
 
             var IssueList = []; //empty array to store all issue pertaining to a project
+
             allProjects[0].issue.map((item)=>{
                 let temp = {
                     "title" : item.title,
                     "description" : item.description,
                     "label" : item.labels,
                     "author" : item.author
-                }
+                };
 
                 IssueList.push(temp);
             });
@@ -102,7 +103,7 @@ app.get('/projectDetails/', function(req,res){
             return res.render('projectDetails', {
                 title: "Project Details",
                 create_Proj: allProjects,
-                issue_list: JSON.stringify(IssueList)
+                issue_list: JSON.stringify(IssueList), 
 
             });
         });

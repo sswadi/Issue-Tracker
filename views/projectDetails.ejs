@@ -7,7 +7,7 @@
 
     <div class="Main-container">
         <div class="filter">
-           
+
                 <input type="checkbox" class="label" onchange="handleLabelsEvent()" name="label" value="Bug">
                 <label for="label1"> Bug</label><br>
                 <input type="checkbox" class="label" name="label" value="UI Improvement" onchange="handleLabelsEvent()">
@@ -16,17 +16,16 @@
                 <label for="label3">Enhancement</label><br>
                 <input type="checkbox" class="label" name="label" value="Documentation" onchange="handleLabelsEvent()">
                 <label for="label4">Documentation</label><br><br>
-                <input type="submit" value="Submit">
+                <form>
+                    <input type="button" onclick="removeFilter()" value="Deselect Labels">
+                </form>
+           
 
             <select name="authors-filter" multiple id ="authors_filter">
                 <% for(let i of create_Proj){ %>
                         <option value="<%= i.author %>"><%= i.author %></option>
                 <% } %>
             </select>
-
-        </div>
-        <div class="search">
-            <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Type in project title/desc.." title="Type in project title/desc..">
 
         </div>
         
@@ -39,16 +38,7 @@
                             <p>Description: <%= i.description %></p>
                             <p>Author: <%= i.author %></p>
                             <p>Issue:
-                                <ul id="all-issues-list" data-all-issues = "<%= issue_list %>">
-                                    
-                                    <% for(let j of i.issue ){ %>
-                                            <li class="IssueList">  
-                                                <p>Title: <%= j.title %></p>
-                                                <p>Description: <%= j.description %></p>
-                                                <p>Label: <%= j.labels %></p>
-                                                <p>Author: <%= j.author %></p>
-                                            </li>
-                                    <% } %>
+                                <ul id="all-issues-list" data-all-issues = "<%= issue_list%>">
                     
                                 </ul>
                             </p>
