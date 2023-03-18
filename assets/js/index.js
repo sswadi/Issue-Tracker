@@ -33,6 +33,12 @@ function showAllIssue(){
 function removeFilter(){
 
     filterIssues = allIssues;
+    var inputElements = document.getElementsByClassName('label');
+    for(var i=0; inputElements[i]; ++i){
+        if(inputElements[i].checked){
+            inputElements[i].checked=false;
+        }
+    }
     showAllIssue();
 }
 

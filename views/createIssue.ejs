@@ -1,12 +1,22 @@
 <html>
 <head>
     <title> <%= title %> </title>
+    <link rel="stylesheet" href="/css/createIssue.css">
 </head>
 <body>
 
-    <form action="/addIssue?id=<%= idd %>" method="post">
-        <input type="text" name="title" placeholder="Type in the title.." required>
-        <input type="text" name="description" placeholder="Add description.." required>
+<section class="createProjectSection">
+    <form class="createProjectForm" action="/addIssue?id=<%= idd %>" method="post">
+
+    <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">Issue Title</label>
+        <input type="text" name="title" class="form-control" id="exampleFormControlInput1" placeholder="Type in the title.." required>
+    </div>
+    <div class="mb-3">
+        <label for="exampleFormControlTextarea1" class="form-label">Issue Description</label>
+        <input type="text" name="description" class="form-control" id="exampleFormControlInput1" placeholder="Add description.." required>
+    </div>
+    <div class="mb-3">
         <label for="labels">Choose an issue type:</label>
         <select name="labels" id="labels">
             <option value="">Select Label</option>
@@ -15,10 +25,14 @@
             <option value="Documentation">Documentation</option>
             <option value="Enhancement">Enhancement</option>
         </select>
-        <input type="text" name="author" placeholder="Add in your name.." required>
-        <button>Add Issue</button>
+    </div>
+    <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">Issue Author</label>
+        <input type="text" name="author" class="form-control" id="exampleFormControlInput1" placeholder="Add in your name.." required>
+    </div>
+        <button class=" btn btn-success">Create Issue</button>
     </form> 
-
+</section>
 
 </body>
 </html>

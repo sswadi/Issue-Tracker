@@ -1,57 +1,60 @@
 <html>
 <head>
     <title> <%= title %> </title>
+    <link rel="stylesheet" type="text/css" href="/css/projectDetails.css">
     <script src="https://kit.fontawesome.com/34ad640c13.js" crossorigin="anonymous"></script>
+
+     
 </head>
 <body>
 
     <div class="Main-container">
+        <h6 style="text-align: center;">FILTER BY</h6>
         <div class="filter">
 
                 <input type="checkbox" class="label" onchange="handleLabelsEvent()" name="label" value="Bug">
-                <label for="label1"> Bug</label><br>
+                <label for="label1"> Bug</label>
                 <input type="checkbox" class="label" name="label" value="UI Improvement" onchange="handleLabelsEvent()">
-                <label for="label2"> UI Improvement</label><br>
+                <label for="label2"> UI Improvement</label>
                 <input type="checkbox" class="label" name="label" value="Enhancement" onchange="handleLabelsEvent()">
-                <label for="label3">Enhancement</label><br>
+                <label for="label3">Enhancement</label>
                 <input type="checkbox" class="label" name="label" value="Documentation" onchange="handleLabelsEvent()">
-                <label for="label4">Documentation</label><br><br>
+                <label for="label4">Documentation</label>
                 <form>
-                    <input type="button" onclick="removeFilter()" value="Deselect Labels">
+                    <input type="button" class="dsl" onclick="removeFilter()" class="btn btn-info" value="Deselect Labels">
                 </form>
            
 
-            <select name="authors-filter" multiple id ="authors_filter">
+            <!-- <select name="authors-filter" multiple id ="authors_filter">
                 <% for(let i of create_Proj){ %>
                         <option value="<%= i.author %>"><%= i.author %></option>
                 <% } %>
-            </select>
+            </select> -->
 
         </div>
         
         <div class="details">
-            <ul>
+            <ul style="list-style: none;">
                 <% for(let i of create_Proj){ %>
                     <div class="deetsSection">
                         <li class="ProjectList">
-                            <p>Name: <%= i.name %></p>
-                            <p>Description: <%= i.description %></p>
-                            <p>Author: <%= i.author %></p>
-                            <p>Issue:
-                                <ul id="all-issues-list" data-all-issues = "<%= issue_list%>">
-                    
-                                </ul>
-                            </p>
-
-                                <div id="button" >
-                                    <form action="/createIssue/?id=<%= i._id %>" method="post">
-                                        <button>
-                                            Create Issue
-                                        </button>
-                                    </form>
-                                </div>
-                           
-                        </li>
+                            <li class="ProjectList">
+                                <p style="text-decoration: underline; text-align: center; margin-top: 15px"><b style="color: rgba(0, 0, 0, 0.715);">Title:</b> <%= i.name %></p>
+                                <p style="text-align:end; margin-top: 20px; margin-right: 44px;"><b style="color: rgba(0, 0, 0, 0.715);">Created by:</b> <%= i.author %></p>
+                                <p><b style="color: rgba(0, 0, 0, 0.715);">Description: </b> <%= i.description %></p>
+                               
+                                <p><b style="color: rgba(0, 0, 0, 0.715);">Issues:</b>
+                                    <ul id="all-issues-list" data-all-issues = "<%= issue_list%>"> </ul>
+                                </p>
+    
+                                    <div id="button" >
+                                        <form action="/createIssue/?id=<%= i._id %>" method="post">
+                                            <button class="raiseAnIssueBtn">
+                                                Raise an Issue
+                                            </button>
+                                        </form>
+                                    </div>
+                            </li>
                 <% } %>
             </ul>
 

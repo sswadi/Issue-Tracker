@@ -1,8 +1,9 @@
 .navHeader {
     width: 100vw;
-    height: 35px;
+    /* height: 35px; */
     margin: 0;
-    background-color: dodgerblue;
+    /* background-color: dodgerblue; */
+    background-color: rgb(2, 125, 248);
     padding: 20px 50px;
 
     display: flex;

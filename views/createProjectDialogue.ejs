@@ -1,14 +1,26 @@
 <html>
 <head>
+    <link rel="stylesheet" href="/css/createProject.css">
 </head>
 <body>
     
-    <form action="create-Project" method="post">
-        <input type="text" name="name" placeholder="Type in your project name.." required>
-        <input type="text" name="description" placeholder="Add description.." required>
-        <input type="text" name="author" placeholder="Add in name of the author" required>
-        <button>Add Project</button>
+<section class="createProjectSection">
+    <form class="createProjectForm" action="create-Project" method="post">
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Project Name</label>
+            <input type="text" name="name" class="form-control" id="exampleFormControlInput1" placeholder="Type in your project name.." required>
+        </div>
+        <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label">Description</label>
+            <input type="text" name="description" class="form-control" id="exampleFormControlTextarea1"  placeholder="Add description.." required>
+        </div>
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Author Name</label>
+            <input type="text" name="author" class="form-control" id="exampleFormControlInput1" placeholder="Add in name of the author" required>
+        </div>
+        <button type="submit" class="btn btn-success">Create Project</button>
     </form>
+</section>
 
 
 </body>

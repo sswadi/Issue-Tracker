@@ -8,16 +8,17 @@
     <div id="container">
         <div id="button" >
             <form action="/createProjectDialogue" method="post">
-                <button>
+                <button class ="btn btn-warning btn-lg">
                     Create Project
                 </button>
             </form>
         </div>
 
-        <div id="lists">
-            <ul>
+        <div id="lists" class="list-group-item list-group-item-info">
+            <ol style="list-style: none;">
                 <% for(let i of create_Proj){ %>
-                    <div class="deetsAndDelete">
+                    
+                    <div class="deetsAndDelete" class="list-group-item list-group-item-primary">
                         <li class="ProjectList">
                             <p>Name: <%= i.name %></p>
                             <p>Description: <%= i.description %></p>
@@ -25,17 +26,16 @@
                         </li>
                         <div class="delete-button">
                             <a href="/deleteProjectDetails/?id=<%= i._id %>">
-                            <i class="fas fa-window-close"></i>
+                            <i class="fas fa-window-close" style='color: rgb(96, 177, 107)'></i>
                             </a>
                         </div>
                     </div>
-                    
-                    <button>
-                        <a href="/projectDetails?id=<%= i._id %>">Open Project</a>
+                    <button type="submit" class="btn btn-info btn-sm" >
+                        <a style="text-decoration: none" href="/projectDetails?id=<%= i._id %>">OPEN PROJECT</a>
                     </button>
                     
                 <% } %>
-            </ul>
+            </ol>
             
         </div>
     </div>

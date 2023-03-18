@@ -1,5 +1,6 @@
 .card-header{
     width: 95vw;
+    /* width: 100vw; */
     height: 20px;
     margin: 0;
     background-color: dodgerblue;
@@ -9,4 +10,13 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+}
+
+.blockquote-footer{
+    margin-top: 1rem;
+    /* color: rgb(91, 85, 85); */
+}
+
+.card-header p{
+    margin-top: 1rem;
 }

@@ -11,6 +11,8 @@ body{
     width: 70%px;
     text-align: center;
     margin: 10px;
+    overflow-x: hidden;
+    overflow-y: scroll;
 }
 
 #button{
@@ -20,7 +22,9 @@ body{
 
 .deetsAndDelete{
     display : flex;
-    background-color: #beb9b9;
+    /* background-color: #beb9b9; */
+    background-color: #b9e1ea;
+    width: 98%;
     margin: 5px;
     padding: 10px;
     font-size: 20px;
@@ -36,6 +40,11 @@ body{
     position: relative;
     /* right: 10px; */
 }
+
+.btn-primary { 
+    background: #50b948;
+    border-color: #33912c;
+  }
 
 
 
